@@ -1,12 +1,11 @@
-
 {
-    "name": "net64plus-server-settings",
-    "version": "0.0.1",
-    "description": "Net64+ Dedicated Server - Settings Manager",
-    "main": "dist/index.js",
-    "scripts": {
-      "start": "node ./dist/"
-    },
-    "author": "Audrddax",
-    "license": "MIT"
-  }
+  "name": "net64plus-server-settings",
+  "version": "0.0.1",
+  "description": "Net64+ Dedicated Server - Settings Manager",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node ./dist/"
+  },
+  "author": "Audrddax",
+  "license": "MIT"
+}

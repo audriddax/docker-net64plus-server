@@ -1,18 +1,19 @@
-FROM node:carbon
+FROM ubuntu:18.04
 
 # Update and get necessary dependencies
 RUN apt-get update
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm
 RUN apt-get install -y unzip
 
-WORKDIR /usr/src
-
 # Download net64 and unzip it
-RUN wget https://github.com/Tarnadas/net64plus-server/archive/master.zip
+WORKDIR /usr/src/
+ADD https://github.com/Tarnadas/net64plus-server/archive/master.zip master.zip
 RUN unzip master.zip
 
 WORKDIR /usr/src/net64plus-server-master
 
-RUN npm install
+RUN npm install --production
 RUN npm i -g pm2
 
 WORKDIR /usr/src/settings

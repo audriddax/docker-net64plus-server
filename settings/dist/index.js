@@ -3,6 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 var exec = require('child_process').exec;
+var pm2 = require('pm2');
 
 var serverSettings = {
     manager: {},
@@ -282,3 +283,18 @@ loadManagerSettings()
     .then(startNet64Server)
     .then(startSettingsServer)
     .catch(logAggressiveError);
+
+var test = '┌──────────┬────┬──────┬─────┬────────┬─────────┬────────┬─────┬───────────┬──────┬──────────┐│ App name │ id │ mode │ pid │ status │ restart │ uptime │ cpu │ mem       │ user │ watching │├──────────┼────┼──────┼─────┼────────┼─────────┼────────┼─────┼───────────┼──────┼──────────┤│ net64    │ 0  │ fork │ 43  │ online │ 0       │ 42m    │ 0%  │ 44.8 MB   │ root │ disabled │└──────────┴────┴──────┴─────┴────────┴─────────┴────────┴─────┴───────────┴──────┴──────────┘';
+
+function parsePm2Listing(listing) {
+    let elements = listing.split(String.fromCharCode(9474)).splice(1);
+    elements.pop();
+    const columnCount = Math.floor(elements.length / 2);
+    let results = {};
+
+    for(let index = 0; index < columnCount; ++index) {
+        results[elements[index].trim().toLowerCase().replace(/ /g, '_')] = elements[index + columnCount + 1].trim();
+    }
+
+    return elements;
+}
